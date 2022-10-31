@@ -1,0 +1,33 @@
+version: '3.1'
+services:
+  database:
+    image: "postgres"
+    container_name: db-profile
+    restart: always
+    env_file:
+      - database.env
+    ports:
+      - "5432:5432"
+  web:
+    build: ./backend/
+    depends_on:
+      - database
+    container_name: profile_backend
+    restart: always
+    external_links:
+      - db-profile:db-profile
+#      - events_bot:events_bot
+    volumes:
+      - ./backend:/backend
+    ports:
+      - "8000:8000"
+#  nginx:
+#    image: nginx:alpine
+#    container_name: nginx
+#    depends_on:
+#      - web
+#    restart: unless-stopped
+#    external_links:
+##      - events_backend:events_backend
+#    ports:
+#      - "80:80"
