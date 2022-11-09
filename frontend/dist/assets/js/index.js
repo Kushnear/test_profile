@@ -1871,7 +1871,7 @@
         console.log(response.data)
         const userId = response.data.id;
         const post = {
-          userId,
+          user_id: userId,
           text: input.value
         };
         try {
@@ -1898,8 +1898,8 @@
           if (!!element.text) {
             postsContainer.insertAdjacentHTML("beforeend", `<div class="post">
                 <div class="post__name"> 
-                    <p class="post__first-name">${userResponse.data.firstName}</p>
-                    <p class="post__last-name">${userResponse.data.lastName}</p>
+                    <p class="post__first-name">${userResponse.data.first_name}</p>
+                    <p class="post__last-name">${userResponse.data.last_name}</p>
                 </div>
                 <p class="post__text">${element.text}</p>
             </div>`);
