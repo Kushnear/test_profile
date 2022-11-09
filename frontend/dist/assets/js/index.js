@@ -1871,7 +1871,7 @@
         console.log(response.data)
         const userId = response.data.id;
         const post = {
-          user_id: userId,
+          user: {id: userId},
           text: input.value
         };
         try {
