@@ -12,6 +12,7 @@ api_router = APIRouter(prefix='/api')
 
 @api_router.get("/user/{user_id}")
 async def get_user(user_id: int):
+    await User.objects.create(first_name='Лысый', last_name='Дед', photo='backend/photos/1.jpg')
     user = await User.objects.select_related(['comments']).get_or_none(pk=user_id)
     if user is None:
         raise HTTPException(status_code=404, detail="User not found")
