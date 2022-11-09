@@ -1875,7 +1875,7 @@
           text: input.value
         };
         try {
-          const postResponse = await axios_default2.post("http://178.250.157.107:8000/api/comment/create", post);
+          const postResponse = await axios_default2.post("http://178.250.157.107:8000/api/comment/create",{}, { params: post});
           console.log(postResponse);
         } catch (err) {
           console.log(err);
