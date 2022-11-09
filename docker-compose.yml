@@ -19,7 +19,7 @@ services:
     volumes:
       - ./backend:/backend
     ports:
-      - "8000:8000"
+      - "8000"
   nginx:
     build: ./frontend/
     container_name: nginx
