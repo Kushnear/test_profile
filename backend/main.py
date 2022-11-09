@@ -1,12 +1,15 @@
 from fastapi import FastAPI
-
+from starlette.middleware.cors import CORSMiddleware
 from backend.api import api_router
 from backend.db import metadata, engine, database
+from backend.models import User
 
 app = FastAPI()
 
 metadata.create_all(engine)
 app.state.database = database
+
+origins = ["*"]
 
 
 @app.on_event("startup")
@@ -24,3 +27,10 @@ async def shutdown() -> None:
 
 
 app.include_router(api_router)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)

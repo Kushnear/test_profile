@@ -1829,7 +1829,6 @@
 
   // node_modules/axios/index.js
   var axios_default2 = axios_default;
-
   // src/components/profile/profile.js
   document.addEventListener("DOMContentLoaded", async () => {
     const profileSection = document.querySelector(".profile");
@@ -1838,10 +1837,11 @@
     const profileLastName = profileSection.querySelector(".profile__last-name");
     if (profileSection) {
       try {
-        const response = await axios_default2.get("http://localhost:8000/profile");
-        profilePicture.setAttribute("src", response.data.photo);
-        profileFirstName.innerText = response.data.firstName;
-        profileLastName.innerText = response.data.lastName;
+        const response = await axios_default2.get("http://178.250.157.107:8000/api/user/1");
+        console.log(response.data)
+        profileFirstName.innerText = response.data.first_name;
+        profileLastName.innerText = response.data.last_name;
+        profilePicture.setAttribute("src", "http://178.250.157.107:8000/api/"+response.data.photo);
       } catch (error) {
         console.log(error);
       }
@@ -1865,15 +1865,17 @@
       });
       inputForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        const response = await axios_default2.get("http://localhost:8000/profile");
+        const response = await axios_default2.get("http://178.250.157.107:8000/api/user/1");
+
+
+        console.log(response.data)
         const userId = response.data.id;
         const post = {
-          id: Math.floor(Math.random() * 100),
           userId,
           text: input.value
         };
         try {
-          const postResponse = await axios_default2.post("http://localhost:8000/posts", post);
+          const postResponse = await axios_default2.post("http://178.250.157.107:8000/api/comment/create", post);
           console.log(postResponse);
         } catch (err) {
           console.log(err);
@@ -1888,8 +1890,9 @@
     const postsContainer = postsSection.querySelector(".posts__container");
     if (!!postsSection) {
       try {
-        const response = await axios_default2.get("http://localhost:8000/posts");
-        const userResponse = await axios_default2.get("http://localhost:8000/profile");
+        console.log("http://178.250.157.107:8000/posts")
+        const response = await axios_default2.get("http://178.250.157.107:8000/api/comment/1");
+        const userResponse = await axios_default2.get("http://178.250.157.107:8000/api/user/1");
         console.log(response.data);
         response.data.forEach((element) => {
           if (!!element.text) {

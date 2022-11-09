@@ -1,12 +1,6 @@
-FROM node:latest
+FROM nginx:alpine
 
 WORKDIR /code
 
-COPY package*.json ./
-
-RUN npm install
-
-COPY . /code/frontend
-
-EXPOSE 8080
-CMD ["gulp", "start"]
+COPY ./dist /code/frontend
+COPY ./nginx/default.conf /etc/nginx/nginx.conf
